@@ -35,7 +35,9 @@ void game() {
     }
 
 }
-
+/// <summary>
+/// /
+/// </summary>
 void start() {
 
     std::cout << "Hi oleg, popy myl?\n";
