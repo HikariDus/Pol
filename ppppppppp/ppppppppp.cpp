@@ -1,68 +1,23 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <cstdlib>
-#include <ctime>
-
-    
-
-    void dialog();
-
-
-
-
-
-
-
-/// <summary>
-/// /
-/// </summary>
-
+using namespace std;
 
 int main()
 {
-    std::string user;
-    std::string comp;
-    srand(time(NULL));
-    for (int i = 0; i < 10; i++) {
-        int t = rand() % 3;
-        if (t == 1) {
-            comp = "kam";
-        }
-        else if (t == 2) {
-            comp = "scis";
-        }
-        else {
-            comp = "pap";
-        }
+	string shop[3]{ "name", "price", "count" };
+	string list[4]{ "potato", "tomato", "apple", "fish"};
+	int price[4]{ 14, 10, 7, 45 };
+	int count[4]{ 20, 15, 25, 0 };
+	int wallet = 91;
 
-        std::cout << "choose kam, scis or pap\n";
-        std::cin >> user;
-        
-        if (user ==  comp ) {
-                std::cout << "tie\n";
-                std::cout << comp;
-        }
-        else if (user == "kam" and comp == "csis" or user == "scis" and comp == "pap" or user == "pap" and comp == "kam") {
-
-                std::cout << "win\n";
-                std::cout << comp;
-        }
-        else {
-                std::cout << "lose\n";
-                std::cout << comp;
-
-        }
-              
-    }
+	//while (true) {
+		cout << "your money = " << wallet << "\n";
+		cout << "name\t" << "count\t" << "price\n";
+		for (int i = 0; i < 3; i++)
+		{
+			cout << list[i] << "\t" << price[i] << "\t" << count[i] << "\n";
+		}
+		cout << "choose a product\n";
+		cin >>
 }
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
