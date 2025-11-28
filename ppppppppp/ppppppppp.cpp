@@ -1,143 +1,213 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <vector>
 using namespace std;
 
-int main()
-{
-	string list[4]{ "potato", "tomato", "apple", "fish" };
-	int price[4]{ 14, 10, 7, 45 };
-	int count[4]{ 20, 15, 25, 0 };
-	int wallet = 91;
+struct location {
+	string name;
+	string item;
+};
+struct items {
+	string name;
+	string description;
+};
+struct inventory {
+	string name;
+	int quantity;
+};
 
+vector <location> place;
+vector <items> item;
+vector <inventory> bag;
+int main() {
+	place.push_back ({ "hall", "letter"});
+	place.push_back ({ "cabinet", "pen"});
+	place.push_back({ "kitchen", "knife" });
+	place.push_back({ "corridor", "empty box" });
+	item.push_back({ "letter", "sealed letter, need something sharp to open it" });
+	item.push_back({ "pen","just a pen" });
+	item.push_back({ "knife","kitchen knife, can cut something" });
+	item.push_back({ "empty box", "what you want to find in empty box?" });
+
+	string move;
+	int choise;
 	while (true)
 	{
-		cout << "Your money = " << wallet << "\n";
-		cout << "name\t" << "count\t" << "price\n";
+		cout << "choose where to go\n";
 
-		for (int i = 0; i < 3; i++)
-		{
-			cout << list[i] << "\t" << count[i] << "\t" << price[i] << "\n";
+		for (int i = 0; i < place.size(); i++) {
+			cout << place[i].name << "\n";
 		}
-		cout << "choose product (or type 'exit')\n";
-		string productname;
-		cin >> productname;
+		cin >> move;
 
-		if (productname == "exit")
-		{
-			break;
-		}
-		int productindex = -1;
-		for (int i = 0; i < 3; i++)
-		{
-			if (list[i] == productname)
-			{
-				productindex = i;
+
+		for (int i = 0; i < place.size(); i++) {
+			bool flag = false;
+
+			if (place[i].name == move) {
+				flag = true;
+				cout << "you've entered" << "\t" << move << "\n";
+				cout << "what you want to do?\n" << "1. search for items\n2. move to another room\n";
+
+				cin >> choise;
+
+				if (choise == 1) {
+					if (place[i].item != "none")
+						cout << "you've found a\t" << place[i].item << "\n";
+					bag.push_back({ place[i].item, 1 });
+					place[i].item = "none";
+				}
+
+				else if (place[i].item == "none") {
+					cout << "there is nothing in this room\n";
+					break;
+				}
+			}
+			if (choise == 2) {
 				break;
 			}
-		}
-		if (productindex == -1)
-		{
-			cout << "Product not found. Try again\n";
-			continue;
-		}
-		cout << "Enter quantity for purchase: ";
-		int	quantity;
-		cin >> quantity;
 
-		if (quantity <= 0)
-		{
-			"Incorrect quantity\n";
-			continue;
+
+
+			if (move == "bag") {
+				cout << "your inventory\n";
+				for (int i = 0; i < bag.size(); i++) {
+					cout << bag[i].name << "\t" << bag[i].quantity << "\n";
+				}
+				break;
+			}
+
+
+			if (i == place.size() - 1 && !flag && move != "bag")
+			{
+				cout << "you don't know such place\n";
+				flag = false;
+				break;
+			}
+
 		}
 
-		if (count[productindex] < quantity)
-		{
-			cout << "Not enough quantity for purchase\n";
-			continue;
-		}
-		int totalPrice = price[productindex] * quantity;
-		if (wallet < totalPrice)
-		{
-			cout << "Not enough money for purchase\n";
-			continue;
-		}
-		count[productindex] -= quantity;
-		wallet -= totalPrice;
-		cout << "Purchase successful!\n";
-	}	
-	cout << "Thank you for purchase!\n Your money = " << wallet << "\n";
-	return 0;
+	}
+
 }
 
 
-//#include <iostream>
-//#include <string>
-//using namespace std;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//struct product {
+//	string name;
+//	int count;
+//	int price;
+//};
+//struct bas {
+//	string name;
+//	int count;
+//	int price;
+//};
+//vector<product> shop;
+//vector<bas> basket;
+//int main()
+//{
+//	shop.push_back({ "apple", 5, 100 });
+//	shop.push_back({ "cheese", 10, 75 });
+//	shop.push_back({ "meat", 21, 500 });
+//	int wallet = 2350;
+//	string productuser;
+//	int productCount;
 //
-//int main() {
-//    string list[4]{ "potato", "tomato", "apple", "fish" };
-//    int price[4]{ 14, 10, 7, 45 };
-//    int count[4]{ 20, 15, 25, 0 };
-//    int wallet = 91;
+//	while (true)
+//	{
+//		
+//		cout << "\nYour money = " << wallet << "\n";
+//		cout << "Select product for purchase or type 'bask' for your basket\n";
+//		
+//		
+//		for (int i = 0; i < shop.size(); i++) {
+//			cout << shop[i].name << "\t" << shop[i].count << "\t" << shop[i].price << "\n";
 //
-//    while (true) {
-//        cout << "\nyour money = " << wallet << "\n";
-//        cout << "name\t" << "count\t" << "price\n";
+//		}
+//		cin >> productuser;
 //
-//        for (int i = 0; i < 3; i++) {
-//            cout << list[i] << "\t" << count[i] << "\t" << price[i] << "\n";
-//        }
 //
-//        cout << "choose product (or 'exit'): ";
-//        string productName;
-//        cin >> productName;
+//		for (int i = 0; i < shop.size(); i++)
+//		{
+//			bool flag = false;
 //
-//        if (productName == "exit") {
-//            break;
-//        }
+//			if (shop[i].name == productuser)
+//			{
+//				flag = true;
+//				cout << "Select quantity for purchase\n";
+//				cin >> productCount;
 //
-//        // Поиск продукта по названию
-//        int productIndex = -1;
-//        for (int i = 0; i < 3; i++) {
-//            if (list[i] == productName) {
-//                productIndex = i;
-//                break;
-//            }
-//        }
 //
-//        if (productIndex == -1) {
-//            cout << "product not found. try again.\n";
-//            continue;
-//        }
 //
-//        cout << "enter quantity for purchase: ";
-//        int quantity;
-//        cin >> quantity;
 //
-//        if (quantity <= 0) {
-//            cout << "incorrect quantity.\n";
-//            continue;
-//        }
+//				if (shop[i].count >= productCount && wallet >= productCount * shop[i].price)
+//				{
+//					//cout << "YES quantity\n";
+//					cout << "\nCHECK: \t " << productCount * shop[i].price << "\n";
+//					shop[i].count -= productCount;
+//					wallet -= productCount * shop[i].price;
+//					basket.push_back({ productuser, productCount, shop[i].price });
+//					
+//				}
+//				else
+//				{
+//					cout << "wrong quantity or NO MONEY\n " << productCount * shop[i].price << " > " << wallet << endl << shop[i].count << ">" << productCount << "\n";
+//				}
 //
-//        if (count[productIndex] < quantity) {
-//            cout << "not enough quantity for purchase.\n";
-//            continue;
-//        }
+//				break;
+//			
+//				
+//				
+//			}
 //
-//        int totalPrice = price[productIndex] * quantity;
-//        if (wallet < totalPrice) {
-//            cout << "not enough money.\n";
-//            continue;
-//        }
 //
-//        // Обновление данных
-//        count[productIndex] -= quantity;
-//        wallet -= totalPrice;
+//			if (i == shop.size() - 1 && !flag && productuser != "bask") {
 //
-//        cout << "purchase succseful!\n";
-//    }
+//				cout << "Wrong product, try again\n";
+//				flag = false;
+//				break;
+//			}
 //
-//    cout << "thank you for purchase! your money: " << wallet << "\n";
-//    return 0;
+//				
+//			
+//		}
+//
+//			 if (productuser == "bask") {
+//
+//				cout << "your basket:\n";
+//				for (int i = 0; i < basket.size(); i++) {
+//					cout << basket[i].name << "\t" << basket[i].count << "\n";
+//				}
+//			 }
+//
+//
+//	}
+//
+//
 //}
+
+
